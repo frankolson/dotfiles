@@ -79,6 +79,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
+set backupcopy=yes      " needed to make webpack-dev-server to work
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
