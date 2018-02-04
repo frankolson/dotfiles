@@ -1,7 +1,10 @@
 " LAUNCH CONFIG {{{
 call pathogen#infect()        " use pathogen
-filetype plugin indent on
-syntax on
+set nocompatible              " We're running Vim, not Vi!
+syntax on                     " Enable syntax highlighting
+filetype on                   " Enable filetype detection
+filetype indent on            " Enable filetype-specific indenting
+filetype plugin on            " Enable filetype-specific plugins
 " }}}
 
 " COLORS {{{
@@ -12,36 +15,36 @@ colorscheme solarized         " awesome colorscheme
 " }}}
 
 " SPACES AND TABS {{{
-set tabstop=2           " number of visual spaces per TAB
-set softtabstop=2       " number of spaces in tab when editing
-set expandtab           " tabs are spaces
-set modelines=1         " turn modelines on
+set tabstop=2                 " number of visual spaces per TAB
+set softtabstop=2             " number of spaces in tab when editing
+set expandtab                 " tabs are spaces
+set modelines=1               " turn modelines on
 " }}}
 
 " UI CONFIG {{{
-set number              " show line numbers
-set showcmd             " show command in bottom bar
-set cursorline          " highlight current line
-filetype indent on      " load filetype-specific indent files
-set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to
-set showmatch           " hightlight matching [{()}]
+set number                    " show line numbers
+set showcmd                   " show command in bottom bar
+set cursorline                " highlight current line
+filetype indent on            " load filetype-specific indent files
+set wildmenu                  " visual autocomplete for command menu
+set lazyredraw                " redraw only when we need to
+set showmatch                 " hightlight matching [{()}]
 " }}}
 
 " SEARCHING {{{
-set incsearch           " search as characters are entered
-set hlsearch            " highlight matches
+set incsearch                 " search as characters are entered
+set hlsearch                  " highlight matches
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 " }}}
 
 " FOLDING {{{
-set foldenable          " enable folding
-set foldlevelstart=10   " open most folds by default
-set foldnestmax=10      " 10 nested fold mas
+set foldenable                " enable folding
+set foldlevelstart=10         " open most folds by default
+set foldnestmax=10            " 10 nested fold mas
 " space open/closes folds
 nnoremap <space> za
-set foldmethod=indent   " fold based on indent level
+set foldmethod=indent         " fold based on indent level
 " }}}
 
 " MOVEMENT {{{
@@ -79,7 +82,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
-set backupcopy=yes      " needed to make webpack-dev-server to work
+set backupcopy=yes                " needed to make webpack-dev-server to work
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
