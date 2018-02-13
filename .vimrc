@@ -90,6 +90,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " }}}
 
 " NERDTREE {{{
+nnoremap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " }}}
 
