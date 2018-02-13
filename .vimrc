@@ -89,4 +89,8 @@ set backupcopy=yes                " needed to make webpack-dev-server to work
 autocmd BufWritePre * %s/\s\+$//e
 " }}}
 
+" NERDTREE {{{
+let NERDTreeShowHidden=1
+" }}}
+
 " vim:foldmethod=marker:foldlevel=0
