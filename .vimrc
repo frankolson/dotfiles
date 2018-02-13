@@ -85,4 +85,8 @@ set writebackup
 set backupcopy=yes                " needed to make webpack-dev-server to work
 " }}}
 
+" AUTOCOMMANDS {{{
+autocmd BufWritePre * %s/\s\+$//e
+}}}
+
 " vim:foldmethod=marker:foldlevel=0
