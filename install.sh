@@ -1,33 +1,21 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+DOTFILES_DIR="${HOME}/.dotfiles"
+directories=("runcom" "config/git" "config/vim")
 
-git pull origin master;
-git submodule init && git submodule update
+for dir in ${directories[@]}; do
+  for dotfile in "$DOTFILES_DIR/$dir"/.*; do
+    if [ -f "$dotfile" ]; then
+      basename=$(basename $dotfile)
 
-function perform() {
-    brew bundle install
+      if [ -f "$HOME/$basename" ]; then
+        mv "$HOME/$basename" "$HOME/$basename.backup"
+      fi
 
-    rsync --exclude ".git/" \
-        --exclude ".gitmodules" \
-        --exclude ".DS_Store" \
-        --exclude ".osx" \
-        --exclude "install.sh" \
-        --exclude "README.md" \
-        --exclude "LICENSE.md" \
-        -avh --no-perms . ~;
+      ln -sv "$dotfile" ~
+    fi
 
-    source ~/.bash_profile;
-}
+  done
+done
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    perform;
-else
-    read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-    echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        perform;
-    fi;
-fi;
-
-unset perform;
+source ~/.bash_profile;

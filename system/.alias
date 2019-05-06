@@ -1,0 +1,30 @@
+# Better ls
+alias ls="ls -Ga"
+alias ll="ls -la"
+
+# Rails stuff
+alias kill_rails='kill -9 $(lsof -i tcp:3000 -t)'
+alias be="bundle exec"
+alias bi="bundle install"
+alias brails="bin/rails"
+
+# tmux stuff
+alias tx="tmuxinator"
+
+# Brew stuff
+alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+
+# Development Stuff
+alias dringo_dev='osascript ~/Scripts/dringo_dev_setup.scpt'
+alias mw_dev='osascript ~/Scripts/mw_dev_setup.scpt'
+
+# Heroku stuff
+alias prod_console='heroku run rails c -a dringoproduction'
+alias stag_console='heroku run rails c -a dringostaging'
+
+# Docker stuff
+alias bread-dev-server='docker exec -it platform_p-server_1 $1'
+alias bread-dev-client='docker exec -it platform_p-client_1 $1'
+
+# Recursively remove .DS_Store files
+alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"

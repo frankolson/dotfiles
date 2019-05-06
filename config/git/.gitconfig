@@ -1,0 +1,27 @@
+[user]
+    name = Will Olson
+    email = will.olson11@gmail.com
+[github]
+    user = frankolson
+[alias]
+    a = add
+    ca = commit -a
+    cam = commit -am
+    s = status
+    pom = push origin master
+    pog = push origin gh-pages
+    puom = pull origin master
+    puog = pull origin gh-pages
+    cob = checkout -b
+[color]
+    ui = true
+[credential]
+    helper = osxkeychain
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[core]
+    editor = vim
+	excludesfile = /Users/will/.gitignore_global
