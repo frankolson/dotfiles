@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Custom scripts
+PATH=$PATH:$HOME/bin
