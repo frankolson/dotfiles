@@ -9,3 +9,8 @@ git clone git@github.com:frankolson/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 source install.sh
 ```
+
+## Options
+
+You can create a `~/.dotfiles/system/.env_local` file for local, non-version
+controlled, environment variables.
