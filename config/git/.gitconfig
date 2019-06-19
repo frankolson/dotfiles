@@ -12,7 +12,9 @@
     pog = push origin gh-pages
     puom = pull origin master
     puog = pull origin gh-pages
+    co = checkout
     cob = checkout -b
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 [color]
     ui = true
 [credential]

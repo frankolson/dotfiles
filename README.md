@@ -10,7 +10,7 @@ cd ~/.dotfiles
 source install.sh
 ```
 
-## Options
+## Configuration Options
 
 You can create a `~/.dotfiles/system/.env_local` file for local, non-version
 controlled, environment variables.
