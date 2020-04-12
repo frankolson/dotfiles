@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES_DIR="${HOME}/.dotfiles"
-directories=("runcom" "config/git" "config/vim")
+directories=("runcom" "config/git" "config/vim" "config/tmux" "config/ctags")
 
 for dir in ${directories[@]}; do
   for dotfile in "$DOTFILES_DIR/$dir"/.*; do

@@ -1,107 +1,164 @@
 " Vimrc
 
+
+" Automatically source vimrc on save.
+autocmd bufwritepost $MYVIMRC source $MYVIMRC
+
+
+" LEADER SHORTCUTS
+" ----------------
+let mapleader=","
+inoremap jk <esc>
+vnoremap kj <esc>
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+
+" VUNDLE PRE-CONFIGURATION
+" ------------------------
 set nocompatible
 filetype off
-
-filetype plugin indent on
-syntax on
-
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" My Plugins
-Plugin 'scrooloose/nerdtree'
+
+" PLUGINS
+" -------
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'ngmy/vim-rubocop'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-commentary'
-Plugin 'posva/vim-vue'
-Plugin 'kchmck/vim-coffee-script'
-" vim-snipmate dependencies
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+Plugin 'craigemery/vim-autotag'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'nelstrom/vim-visual-star-search'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" End vim-snipmate dependencies
-Plugin 'mxw/vim-jsx'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'ianks/vim-tsx'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rbenv'
+Plugin 'tpope/vim-bundler'
+Plugin 'thoughtbot/vim-rspec'
 
-" All of your Plugins must be added before the following line
+
+" VUNDLE POST-CONFIGURATION
+" -------------------------
 call vundle#end()
-filetype plugin indent on
 
-" Auto set vue file type, plugin is broken
-autocmd BufNewFile,BufRead *.vue set ft=vue
-autocmd BufNewFile,BufRead *.coffee set ft=coffee
 
-" UltiSnips
+" COLORS
+" ------
+colorscheme codedark        " awesome colorscheme
+syntax enable               " enable syntax processing
+
+
+" PASTE MODE
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+
+" SPACES AND TABS
+" ---------------
+set tabstop=2               " number of visual spaces per TAB
+set softtabstop=2           " number of spaces in tab when editing
+set expandtab               " tabs are spaces
+
+
+" UI CONFIG
+" ---------
+set number                  " show line numbers
+set hlsearch                " highlight all search matched
+filetype plugin indent on   " load filetype-specific indent files
+
+" Nerdtree
+noremap <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeNodeDelimiter = "\u00a0"
+let NERDTreeShowHidden=1
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Remove trailing whitespace on filesave
+set wrap
+set linebreak
+" note trailing space at end of next line
+set showbreak=>\ \ \
+autocmd BufWritePre * %s/\s\+$//e
+
+" Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-let mapleader = "\<Space>"
 
-" GENERAL
-" -------
-set nobackup
-set nowritebackup
-set noswapfile
-set history=50
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+" CTRL-P CONFIG
+" -------------
+set shell=/bin/bash
 
-" Display relative line numbers, with absolute line number for current line
-set number
-set numberwidth=5
+" Only update results when typing has stopped
+let g:ctrlp_lazy_update = 1
 
-" Let's be reasonable, shall we?
-nmap k gk
-nmap j gj
+" Update default mappings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
-" VISUAL
-" ------
+" Set the local working directory
+let g:ctrlp_working_path_mode = 'ra'
 
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
+" If a file is already open, open it again in a new pane instead of switching
+" to the existing pane
+let g:ctrlp_switch_buffer = 'et'
 
-" Open new split panes to right and bottom
-set splitbelow
-set splitright
+" Exclude files and directories using Vim's wildignore and CtrlP's own
+" g:ctrlp_custom_ignore
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
-" Allow JSX in normal JS files
-let g:jsx_ext_required = 0
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
-" CONVIENENCE
-" -----------
-imap <C-@> <esc>:w<cr>
-
-" Rapid editing of vimrc
-nmap <leader>vr :vsp $MYVIMRC<cr>
-nmap <leader>so :source $MYVIMRC<cr>
-
-" autocmd VimEnter * NERDTree " launch NERDTree on startup
-nnoremap <leader>nt :NERDTree<cr>
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" GREPPING (with The Silver Searcher)
-" -----------------------------------
+" The Silver Searcher
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  " Make CtrlP use ag for listing the files. Way faster and no useless files.
-  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching = 0
 endif
 
-" search for word under cursor
-nnoremap <leader>K :grep! "\b\s?<C-R><C-W>\b"<CR>:cw<CR>
+
+" CTAGS
+" -----
+
+nnoremap <leader>. :CtrlPTag<cr>
+
+
+" RSPEC TESTING
+" ------------
+
+nmap <Leader>rt <Plug>SetTmuxVars
+let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
+
+" vim-rspec mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+

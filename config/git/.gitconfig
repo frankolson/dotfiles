@@ -26,4 +26,10 @@
     required = true
 [core]
     editor = vim
-	excludesfile = /Users/will/.gitignore_global
+    excludesfile = /Users/will/.global_ignore
+[mergetool "fugitive"]
+    cmd = vim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+[merge]
+    tool = fugitive
+[mergetool]
+    keepBackup = false

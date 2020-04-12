@@ -2,3 +2,6 @@
 
 # Custom scripts
 PATH=$PATH:$HOME/bin
+
+# Anaconda
+export PATH="/usr/local/anaconda3/bin:$PATH"
